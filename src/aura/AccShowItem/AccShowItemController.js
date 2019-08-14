@@ -7,7 +7,14 @@
  * @group Lightning Controllers
  *
  */
+
 ({
+    init: function(cmp, event, helper) {
+        var pageReference = cmp.get("v.pageReference");
+        cmp.set("v.accountId", pageReference.state.c__accountId);
+        cmp.set("v.account", pageReference.state.c__account);
+
+    },
     handleRecordUpdated: function(component, event, helper) {
         var eventParams = event.getParams();
         if(eventParams.changeType === "LOADED") {

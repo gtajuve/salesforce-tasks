@@ -4,6 +4,9 @@
 
         // helper.getAccountFieldsList(component);
         helper.getCurrentUserName(component);
+        var pageReference = component.get("v.pageReference");
+        component.set("v.accountId", pageReference.state.c__accountId);
+        component.set("v.account", pageReference.state.c__account);
     },
     handleSubmit:function (component, event, helper) {
         event.preventDefault(); // stop form submission
@@ -14,14 +17,25 @@
         }
 
         component.find("myform").submit(eventFields);
-        var evt = $A.get("e.force:navigateToComponent");
-        evt.setParams({
-            componentDef: "c:AccShowItem",
-            componentAttributes: {
-                accountId: component.get("v.account.Id")
+        // var evt = $A.get("e.force:navigateToComponent");
+        // evt.setParams({
+        //     componentDef: "c:AccShowItem",
+        //     componentAttributes: {
+        //         accountId: component.get("v.account.Id")
+        //     }
+        // });
+        // evt.fire();
+
+        component.find("navigationService").navigate({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__AccShowItem',
+            },
+            state: {
+                "c__accountId":  component.get("v.account.Id"),
+                "c__account":  component.get("v.account")
             }
         });
-        evt.fire();
 
     },
     handleSuccess:function (component, event, helper) {
