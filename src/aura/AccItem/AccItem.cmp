@@ -1,0 +1,21 @@
+<!--
+ - AccItem Lightning Component
+ - @author CloudMyBiz (r)
+ - @date 6/25/19
+ -->
+
+<aura:component description="AccItem"  controller="AccountsController" implements="forceCommunity:availableForAllPageTypes">
+
+    <aura:attribute name="account" type="Account"/>
+    <aura:handler event="force:showToast" action="{!c.refreshView}"/>
+    <tr>
+        <td><div class="slds-truncate" title="{!v.account.Name}">{!v.account.Name}</div></td>
+        <td><div class="slds-truncate" title="{!v.account.Phone}">{!v.account.Phone}</div></td>
+        <td><div class="slds-truncate" title="{!v.account.Type}">{!v.account.Type}</div></td>
+        <td>
+            <lightning:button label="View Details" value="{!v.account.Id}" title="View Details" onclick="{! c.handleViewDetailsClick }"  />
+            <lightning:button label="Edit" value="{!v.account.Id}" variant="brand" title="Edit" onclick="{! c.handleEditClick }"  />
+            <lightning:button label="Delete" value="{!v.account.Id}" variant="destructive" title="Delete" onclick="{! c.handleDeleteClick }"  />
+        </td>
+    </tr>
+</aura:component>
