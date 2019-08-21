@@ -8,8 +8,7 @@
 
     <aura:attribute name="accountFields" type="String[]"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
-
-
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.doInit}" />
 
     <force:recordData aura:id="accountRecord"
                       recordId="{!v.accountId}"

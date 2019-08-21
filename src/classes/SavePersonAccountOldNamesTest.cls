@@ -15,7 +15,7 @@ private class SavePersonAccountOldNamesTest {
 		insert setting;
 	}
 
-	static testMethod void testBehaviorPositive() {
+	static testMethod void testPositive() {
 
 		User u = TestFactory.generateUser('system administrator');
 		System.runAs(u) {
@@ -35,7 +35,7 @@ private class SavePersonAccountOldNamesTest {
 		}
 
 	}
-	static testMethod void testBehaviorNegative() {
+	static testMethod void testNegative() {
 
 		User u = TestFactory.generateUser('standard user');
 		System.runAs(u){

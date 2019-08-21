@@ -1,0 +1,41 @@
+<!--
+ - PerAccItemEdit Lightning Component
+ - @author CloudMyBiz (r)
+ - @date 8/21/19
+ -->
+
+<aura:component description="PerAccItemEdit" controller="PersonAccountsController" implements="lightning:isUrlAddressable,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+
+    <lightning:navigation aura:id="navigationService" />
+    <aura:attribute name="account" type="Person_Account__c"/>
+    <aura:attribute name="fields" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.doInit}" />
+
+    <div>
+        <lightning:card iconName="standard:user" title="{!'Edit View for ' + v.account.Name}">
+            <div class="slds-p-left_medium slds-p-right_medium">
+
+                <div class="slds-p-left_large slds-p-right_medium">
+                    <lightning:recordEditForm
+                            aura:id="myform"
+                            onsubmit="{!c.handleSubmit}"
+                            onsuccess="{!c.handleSuccess}"
+                            recordId="{!v.account.Id}"
+                            objectApiName="Person_Account__c">
+                        <!-- the messages component is for error messages -->
+                        <lightning:messages />
+                        <aura:iteration items="{!v.fields}" var="field">
+                            <lightning:inputField fieldName="{!field.fieldName}" />
+                        </aura:iteration>
+
+
+                        <div class="slds-m-top_medium">
+                            <lightning:button disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save" />
+                        </div>
+                    </lightning:recordEditForm>
+                </div>
+            </div>
+        </lightning:card>
+    </div>
+</aura:component>

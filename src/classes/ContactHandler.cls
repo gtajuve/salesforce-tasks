@@ -11,7 +11,7 @@ public with sharing class ContactHandler{
 	public static PersonAccountService pas = new PersonAccountService();
 	public static AppSettings appSettings = new AppSettings();
 
-	public static void handleTrigger(List<Contact> contacts, System.TriggerOperation triggerEvent ) {
+	public static void handleTrigger(List<Contact> contacts,List<Contact> oldContacts, Map<Id,Contact> newMap, Map<Id,Contact> oldMap, System.TriggerOperation triggerEvent ) {
 
 		switch on triggerEvent {
 

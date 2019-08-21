@@ -21,16 +21,16 @@ public class TestFactory {
 		);
 		insert u;
 
-		PermissionSet ps = [SELECT id FROM PermissionSet WHERE ProfileId = :profileId LIMIT 1];
-		List<FieldPermissions> fieldPermissions = ([SELECT id,PermissionsEdit FROM FieldPermissions WHERE ParentId = :ps.Id AND Field = 'Person_Account__c.Old_First_Name__c' LIMIT 1]);
-		if (fieldPermissions.size() == 0 ) {
-			FieldPermissions fieldPermission = new FieldPermissions(ParentId = ps.Id, Field = 'Person_Account__c.Old_First_Name__c', SobjectType = 'Person_Account__c', PermissionsRead = true, PermissionsEdit = true);
-
-			insert fieldPermission;
-		}else if(!fieldPermissions[0].PermissionsEdit ){
-			fieldPermissions[0].PermissionsEdit = true;
-			update fieldPermissions[0];
-		}
+//		PermissionSet ps = [SELECT id FROM PermissionSet WHERE ProfileId = :profileId LIMIT 1];
+//		List<FieldPermissions> fieldPermissions = ([SELECT id,PermissionsEdit FROM FieldPermissions WHERE ParentId = :ps.Id AND Field = 'Person_Account__c.Old_First_Name__c' LIMIT 1]);
+//		if (fieldPermissions.size() == 0 ) {
+//			FieldPermissions fieldPermission = new FieldPermissions(ParentId = ps.Id, Field = 'Person_Account__c.Old_First_Name__c', SobjectType = 'Person_Account__c', PermissionsRead = true, PermissionsEdit = true);
+//
+//			insert fieldPermission;
+//		}else if(!fieldPermissions[0].PermissionsEdit ){
+//			fieldPermissions[0].PermissionsEdit = true;
+//			update fieldPermissions[0];
+//		}
 		return u;
 
 

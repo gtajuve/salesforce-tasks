@@ -16,18 +16,18 @@ public with sharing class PersonAccountService {
 
 		perAcc.Contact__c = cont.Id;
 		perAcc.Name = cont.Name;
-		if (this.fieldPermission.isContactFieldAccessible('FirstName') && this.fieldPermission.isPersonAccountFieldCreatable('First_Name__c')) {
+		if (this.fieldPermission.isAccessible('Contact','FirstName') && this.fieldPermission.isCreatable('Person_Account__c','First_Name__c')) {
 			perAcc.First_Name__c = cont.FirstName;
 		}
-		if (this.fieldPermission.isContactFieldAccessible('LastName') && this.fieldPermission.isPersonAccountFieldCreatable('Last_Name__c')) {
+		if (this.fieldPermission.isAccessible('Contact','LastName') && this.fieldPermission.isCreatable('Person_Account__c','Last_Name__c')) {
 			perAcc.Last_Name__c = cont.LastName;
 		}
 
-		if (this.fieldPermission.isContactFieldAccessible('MailingAddress') && this.fieldPermission.isPersonAccountFieldCreatable('Mailing_Address__c')) {
+		if (this.fieldPermission.isAccessible('Contact','MailingAddress') && this.fieldPermission.isCreatable('Person_Account__c','Mailing_Address__c')) {
 			perAcc.Mailing_Address__c = convertAddressObjectToString(cont.MailingAddress);
 		}
 
-		if (this.fieldPermission.isContactFieldAccessible('OtherAddress') && this.fieldPermission.isPersonAccountFieldCreatable('Other_Address__c')) {
+		if (this.fieldPermission.isAccessible('Contact','OtherAddress') && this.fieldPermission.isCreatable('Person_Account__c','Other_Address__c')) {
 			perAcc.Other_Address__c = convertAddressObjectToString(cont.OtherAddress);
 		}
 		return perAcc;
@@ -44,16 +44,23 @@ public with sharing class PersonAccountService {
 
 	}
 
-	public void copyPersonAccountOldName(Person_Account__c newPersonAccount, Person_Account__c oldPersonAccount, Set<String> updateableFields){
+	public void copyPersonAccountOldName(List<Person_Account__c> newPersonAccounts, Map<Id, Person_Account__c> oldMap){
 
-		if( updateableFields.contains('Old_First_Name__c') && newPersonAccount.First_Name__c != oldPersonAccount.First_Name__c )
-		{
-			newPersonAccount.Old_First_Name__c = oldPersonAccount.First_Name__c;
+		if (fieldPermission.isUpdateable('Person_Account__c','Old_First_Name__c') && fieldPermission.isAccessible('Person_Account__c','First_Name__c')) {
+			for ( Person_Account__c personAccount : newPersonAccounts){
+				if ( personAccount.First_Name__c != oldMap.get(personAccount.Id).First_Name__c) {
+					personAccount.Old_First_Name__c = oldMap.get(personAccount.Id).First_Name__c;
+				}
+			}
 		}
-		if( updateableFields.contains('Old_Last_Name__c') && newPersonAccount.Last_Name__c != oldPersonAccount.Last_Name__c )
-		{
-			newPersonAccount.Old_Last_Name__c = oldPersonAccount.Last_Name__c;
+		if (fieldPermission.isUpdateable('Person_Account__c','Old_Last_Name__c') && fieldPermission.isAccessible('Person_Account__c','Last_Name__c')) {
+			for ( Person_Account__c personAccount : newPersonAccounts){
+				if ( personAccount.Last_Name__c != oldMap.get(personAccount.Id).Last_Name__c) {
+					personAccount.Old_Last_Name__c = oldMap.get(personAccount.Id).Last_Name__c;
+				}
+			}
 		}
+
 	}
 	private String convertAddressObjectToString(Address address){
 		if (address == null){

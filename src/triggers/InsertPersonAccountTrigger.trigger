@@ -6,6 +6,6 @@
  * @group Triggers
  */
 trigger InsertPersonAccountTrigger on Contact (before insert, after insert, before update, after update, before delete, after delete) {
-	ContactHandler.handleTrigger(Trigger.new,Trigger.operationType);
+	ContactHandler.handleTrigger(Trigger.new,Trigger.old,Trigger.newMap, Trigger.oldMap,Trigger.operationType);
 }
 
