@@ -14,7 +14,11 @@ public with sharing class PersonAccountsController {
 	}
 	@AuraEnabled
 	public static void deletePersonAccount(Person_Account__c account) {
-		delete account;
+		if (Person_Account__c.SObjectType.getDescribe().isDeletable()) {
+			delete account;
+		}
+
+
 	}
 	@AuraEnabled
 	public static DynamicBindingWrapper objectRecords() {
@@ -49,6 +53,37 @@ public with sharing class PersonAccountsController {
 
 		return dynamicData;
 	}
+	@AuraEnabled
+	public static List<String> getUpdateableFields(String action) {
+		String selectedObject = 'Person_Account__c';
+		List<String> defaultFields = new List<String>{
+				'First_Name__c', 'Last_Name__c', 'Old_First_Name__c', 'Old_Last_Name__c', 'Account_Phone__c'
+		};
+		List<String> selectedFieldFields = new List<String>();
+
+		Map<String, Schema.SObjectField> mapFieldList = Schema.getGlobalDescribe().get(selectedObject).getDescribe().fields.getMap();
+
+
+		for (Schema.SObjectField field : mapFieldList.values()) {
+			Schema.DescribeFieldResult fieldResult = field.getDescribe();
+			switch on action {
+				when 'create' {
+					if (defaultFields.contains(fieldResult.getName()) && fieldResult.isCreateable()) {
+						selectedFieldFields.add(fieldResult.getName());
+					}
+				}
+				when 'update' {
+					if (defaultFields.contains(fieldResult.getName()) && fieldResult.isUpdateable()) {
+						selectedFieldFields.add(fieldResult.getName());
+					}
+				}
+			}
+
+		}
+
+		return selectedFieldFields;
+	}
+
 
 	//Class to store the dynamic data and list of related fields
 	public class DynamicBindingWrapper {

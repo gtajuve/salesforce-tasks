@@ -9,11 +9,12 @@
     <lightning:navigation aura:id="navigationService" />
     <aura:attribute name="account" type="Person_Account__c"/>
     <aura:attribute name="fields" type="List"/>
+    <aura:attribute name="action" type="String"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <aura:handler name="change" value="{!v.pageReference}" action="{!c.doInit}" />
 
     <div>
-        <lightning:card iconName="standard:user" title="{!'Edit View for ' + v.account.Name}">
+        <lightning:card iconName="standard:user" title="{! v.account == null? 'Create New Person Account ':'Edit ' + v.account.First_Name__c + ' ' + v.account.Last_Name__c }">
             <div class="slds-p-left_medium slds-p-right_medium">
 
                 <div class="slds-p-left_large slds-p-right_medium">
@@ -21,17 +22,16 @@
                             aura:id="myform"
                             onsubmit="{!c.handleSubmit}"
                             onsuccess="{!c.handleSuccess}"
-                            recordId="{!v.account.Id}"
+                            recordId="{!v.account != null ? v.account.id : null}"
                             objectApiName="Person_Account__c">
                         <!-- the messages component is for error messages -->
                         <lightning:messages />
                         <aura:iteration items="{!v.fields}" var="field">
-                            <lightning:inputField fieldName="{!field.fieldName}" />
+                            <lightning:inputField fieldName="{!field}" />
                         </aura:iteration>
-
-
                         <div class="slds-m-top_medium">
-                            <lightning:button disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save" />
+                            <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                            <lightning:button variant="brand" label="Cancel" onclick="{!c.handleCancelClick}" />
                         </div>
                     </lightning:recordEditForm>
                 </div>

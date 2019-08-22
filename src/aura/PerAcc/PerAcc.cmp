@@ -4,7 +4,7 @@
  - @date 8/19/19
  -->
 
-<aura:component description="PerAcc" controller="PersonAccountsController" implements="force:appHostable">
+<aura:component description="PerAcc" controller="PersonAccountsController"  implements="lightning:isUrlAddressable,force:appHostable">
     <!-- attributes -->
     <lightning:navigation aura:id="navigationService" />
     <aura:attribute name="data" type="List"/>
@@ -13,14 +13,14 @@
     <aura:attribute name="isModalOpen" type="boolean" default="false"/>
 
     <!-- handlers-->
-    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
-
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.init}" />
 
     <!-- the container element determine the height of the datatable -->
     <div aura:id="chooseFields">
         <lightning:card  title="">
             <aura:set attribute="actions">
-                <lightning:button label="New" onclick="{!c.getInputFields}"/>
+                <lightning:button label="New" onclick="{!c.handleClickNewRecord}"/>
             </aura:set>
 
         </lightning:card>
@@ -68,26 +68,5 @@
         </section>
         <div class="slds-backdrop slds-backdrop_open"></div>
     </aura:if>
-<!--    <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">-->
-<!--        <thead>-->
-<!--        <tr class="slds-text-heading_label">-->
-<!--            <aura:iteration items="{!v.columns}" var="column">-->
-<!--                <th scope="col"><div class="slds-truncate" title="{!column.label}">{!column.label}</div></th>-->
-<!--            </aura:iteration>-->
-<!--            <th>-->
-<!--                Actions-->
-<!--            </th>-->
-
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-
-<!--        <aura:iteration items="{!v.data}" var="row">-->
-<!--            <c:PerAccItem account="{!row}" columns="{!v.columns}"/>-->
-<!--        </aura:iteration>-->
-<!--        </tbody>-->
-<!--    </table>-->
-
-
 
 </aura:component>

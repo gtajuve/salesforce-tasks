@@ -6,7 +6,6 @@
     handleRowAction: function (component, event, helper) {
         var action = event.getParam('action');
         var row = event.getParam('row');
-        console.log(row.Id);
         component.set('v.account',row);
         switch (action.name) {
             case 'edit':
@@ -17,7 +16,8 @@
                         componentName: 'c__PerAccItemEdit',
                     },
                     state: {
-                        "c__account":  component.get("v.account")
+                        "c__account":  component.get("v.account"),
+                        "c__action":  'edit'
                     }
                 });
                 break;
@@ -36,7 +36,18 @@
 
         helper.deleteAccount(component,account);
         component.set("v.isModalOpen", false);
-        // helper.removePerAcc(component,account);
     },
+    handleClickNewRecord: function (component, event, helper) {
+        component.find("navigationService").navigate({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__PerAccItemEdit',
+            },
+            state: {
+                "c__action":  'new',
+                "c__account":  null
+            }
+        });
+    }
 
 });
