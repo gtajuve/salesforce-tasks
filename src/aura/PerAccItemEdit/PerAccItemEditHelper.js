@@ -10,7 +10,6 @@
 
         action.setCallback(this, function(actionResult) {
             var fields = actionResult.getReturnValue();
-            console.log(fields);
             component.set('v.fields', fields);
         });
         $A.enqueueAction(action);

@@ -29,10 +29,11 @@
 
     removePerAcc: function (cmp, row) {
         var rows = cmp.get('v.data');
-        var rowIndex = rows.indexOf(row);
-
-        rows.splice(rowIndex, 1);
-        cmp.set('v.data', rows);
+        var rowId =  row.Id;
+        var newRows = rows.filter(function (value,index,arr) {
+            return value.Id != rowId;
+        });
+        cmp.set('v.data', newRows);
     },
 
     deleteAccount: function(component, account) {

@@ -1,0 +1,11 @@
+<!--
+ - modalContent Lightning Component
+ - @author CloudMyBiz (r)
+ - @date 8/22/19
+ -->
+
+<aura:component description="modalContent" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="message" type="String"/>
+    <lightning:icon iconName="utility:warning" alternativeText="Warning!" variant="warning"/>
+    {!v.message}
+</aura:component>

@@ -7,6 +7,8 @@
 <aura:component description="PerAcc" controller="PersonAccountsController"  implements="lightning:isUrlAddressable,force:appHostable">
     <!-- attributes -->
     <lightning:navigation aura:id="navigationService" />
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+
     <aura:attribute name="data" type="List"/>
     <aura:attribute name="columns" type="List"/>
     <aura:attribute name="account" type="sObject"/>
@@ -15,6 +17,8 @@
     <!-- handlers-->
     <aura:handler name="init" value="{!this}" action="{!c.init}" />
     <aura:handler name="change" value="{!v.pageReference}" action="{!c.init}" />
+<!--    <aura:handler event="c:OnClickOkModalEvent"-->
+<!--                  action="{!c.handleDeleteRecordEvent}"/>-->
 
     <!-- the container element determine the height of the datatable -->
     <div aura:id="chooseFields">
@@ -25,7 +29,7 @@
 
         </lightning:card>
     </div>
-    <div style="height: 800px">
+    <div style="height: 700px">
         <lightning:datatable
                 keyField="id"
                 data="{! v.data }"
@@ -33,40 +37,45 @@
                 onrowaction="{! c.handleRowAction }"
                 hideCheckboxColumn="true"/>
     </div>
-    <aura:if isTrue="{!v.isModalOpen}">
+<!--    <aura:if isTrue="{!v.data.length >0 }">-->
+<!--        <c:modalFooter account="{!v.data[0]}" ClickOkModalEvent="{!c.handleDeleteRecordEvent}"/>-->
+<!--    </aura:if>-->
 
-        <!-- Modal/Popup Box starts here-->
-        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
-            <div class="slds-modal__container">
-                <!-- Modal/Popup Box Header Starts here-->
-                <header class="slds-modal__header">
-                    <lightning:buttonIcon iconName="utility:close"
-                                          onclick="{! c.closeModel }"
-                                          alternativeText="close"
-                                          variant="bare-inverse"
-                                          class="slds-modal__close"/>
-                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Record</h2>
-                </header>
-                <!--Modal/Popup Box Body Starts here-->
-                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                    <p><b>You want to delete this record! Are you sure?
-                        </b>
-                    </p>
-                </div>
-                <!--Modal/Popup Box Footer Starts here-->
-                <footer class="slds-modal__footer">
-                    <lightning:button variant="neutral"
-                                      label="Cancel"
-                                      title="Cancel"
-                                      onclick="{! c.closeModel }"/>
-                    <lightning:button variant="brand"
-                                      label="OK"
-                                      title="OK"
-                                      onclick="{!c.submitDetails}"/>
-                </footer>
-            </div>
-        </section>
-        <div class="slds-backdrop slds-backdrop_open"></div>
-    </aura:if>
+
+<!--    <aura:if isTrue="{!v.isModalOpen}">-->
+
+<!--        &lt;!&ndash; Modal/Popup Box starts here&ndash;&gt;-->
+<!--        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">-->
+<!--            <div class="slds-modal__container">-->
+<!--                &lt;!&ndash; Modal/Popup Box Header Starts here&ndash;&gt;-->
+<!--                <header class="slds-modal__header">-->
+<!--                    <lightning:buttonIcon iconName="utility:close"-->
+<!--                                          onclick="{! c.closeModel }"-->
+<!--                                          alternativeText="close"-->
+<!--                                          variant="bare-inverse"-->
+<!--                                          class="slds-modal__close"/>-->
+<!--                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Record</h2>-->
+<!--                </header>-->
+<!--                &lt;!&ndash;Modal/Popup Box Body Starts here&ndash;&gt;-->
+<!--                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">-->
+<!--                    <p><b>You want to delete this record! Are you sure?-->
+<!--                        </b>-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;Modal/Popup Box Footer Starts here&ndash;&gt;-->
+<!--                <footer class="slds-modal__footer">-->
+<!--                    <lightning:button variant="neutral"-->
+<!--                                      label="Cancel"-->
+<!--                                      title="Cancel"-->
+<!--                                      onclick="{! c.closeModel }"/>-->
+<!--                    <lightning:button variant="brand"-->
+<!--                                      label="OK"-->
+<!--                                      title="OK"-->
+<!--                                      onclick="{!c.submitDetails}"/>-->
+<!--                </footer>-->
+<!--            </div>-->
+<!--        </section>-->
+<!--        <div class="slds-backdrop slds-backdrop_open"></div>-->
+<!--    </aura:if>-->
 
 </aura:component>

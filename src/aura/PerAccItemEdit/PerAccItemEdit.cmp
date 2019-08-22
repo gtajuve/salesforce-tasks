@@ -22,7 +22,7 @@
                             aura:id="myform"
                             onsubmit="{!c.handleSubmit}"
                             onsuccess="{!c.handleSuccess}"
-                            recordId="{!v.account != null ? v.account.id : null}"
+                            recordId="{!v.account != null ? v.account.Id : null}"
                             objectApiName="Person_Account__c">
                         <!-- the messages component is for error messages -->
                         <lightning:messages />

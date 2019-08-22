@@ -22,7 +22,37 @@
                 });
                 break;
             case 'delete':
-                component.set("v.isModalOpen", true);
+                // component.set("v.isModalOpen", true);
+                var modalBody;
+                var modalFooter;
+                var message = "Do you want to delete record?";
+
+                $A.createComponents([
+                        ["c:modalContent",{ message:message}],
+                        ["c:modalFooter",{ account:component.get('v.account')}]
+                    ],
+                    function(components, status){
+                        if (status === "SUCCESS") {
+                            modalBody = components[0];
+                            modalFooter = components[1];
+                            modalFooter.addEventHandler('ClickOkModalEvent',function (event) {
+                                var account = event.getParam("account");
+
+                                helper.deleteAccount(component,account);
+                            });
+                            component.find('overlayLib').showCustomModal({
+                                header: "Delete Confirmation",
+                                body: modalBody,
+                                footer: modalFooter,
+                                showCloseButton: true,
+                                cssClass: "my-modal,my-custom-class,my-other-class",
+                                closeCallback: function() {
+
+                                }
+                            })
+                        }
+                    }
+                );
                 break;
         }
     },
@@ -30,7 +60,6 @@
 
         component.set("v.isModalOpen", false);
     },
-
     submitDetails: function(component, event, helper) {
         var account = component.get('v.account');
 
@@ -48,6 +77,11 @@
                 "c__account":  null
             }
         });
+    },
+    handleDeleteRecordEvent:function (component, event, helper) {
+        // var account = event.getParam("account");
+        //
+        // helper.deleteAccount(component,account);
     }
 
 });

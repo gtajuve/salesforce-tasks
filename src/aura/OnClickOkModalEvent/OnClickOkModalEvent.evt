@@ -1,0 +1,7 @@
+<!--
+ - Created by garabadjiev on 8/22/19.
+ -->
+
+<aura:event type="COMPONENT" description="OnClickOkModalEvent">
+    <aura:attribute name="account" type="sObject"/>
+</aura:event>
