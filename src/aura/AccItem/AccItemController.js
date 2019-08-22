@@ -10,38 +10,30 @@
 ({
     handleViewDetailsClick: function(component, event, helper) {
         var account = component.get("v.account");
-        // var navEvent = $A.get("e.force:navigateToSObject");
-        // navEvent.setParams({
-        //     recordId: account.Id,
-        //     slideDevName: "details"
-        // });
-        // navEvent.fire();
-        var evt = $A.get("e.force:navigateToComponent");
-        evt.setParams({
-            componentDef: "c:AccShowItem",
-            componentAttributes: {
-                accountId: component.get("v.account.Id")
+        component.find("navigationService").navigate({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__AccShowItem',
+            },
+            state: {
+                "c__accountId":  component.get("v.account.Id"),
+                "c__account":  component.get("v.account")
             }
         });
-        evt.fire();
 
     },
     handleEditClick: function(component, event, helper) {
-        // var account = component.get("v.account");
-        // var editRecordEvent = $A.get("e.force:editRecord");
-        // editRecordEvent.setParams({
-        //     "recordId": account.Id
-        // });
-        // editRecordEvent.fire();
-
-        var evt = $A.get("e.force:navigateToComponent");
-        evt.setParams({
-            componentDef: "c:AccEditItem",
-            componentAttributes: {
-                accountId: component.get("v.account.Id")
+        component.find("navigationService").navigate({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__AccEditItem',
+            },
+            state: {
+                "c__accountId":  component.get("v.account.Id"),
+                "c__account":  component.get("v.account")
             }
         });
-        evt.fire();
+
 
     },
     handleDeleteClick: function(component, event, helper) {

@@ -1,5 +1,6 @@
-<aura:component controller="AccountsController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+<aura:component controller="AccountsController" implements="lightning:isUrlAddressable,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
 
+    <lightning:navigation aura:id="navigationService" />
 
     <aura:attribute name="accountId" type="Id"/>
     <aura:attribute name="account" type="Account"/>
@@ -10,10 +11,10 @@
 
 
 
-<!--    <force:recordData aura:id="accountRecord"-->
-<!--                      recordId="{!v.accountId}"-->
-<!--                      targetFields="{!v.account}"-->
-<!--                      layoutType="COMPACT"/>-->
+    <force:recordData aura:id="accountRecord"
+                      recordId="{!v.accountId}"
+                      targetFields="{!v.account}"
+                      layoutType="COMPACT"/>
     <div aura:id="chooseFields">
         <lightning:card  title="Choose fields">
             <aura:set attribute="actions">

@@ -1,5 +1,7 @@
 
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+<aura:component implements="lightning:isUrlAddressable,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
 
     <aura:attribute name="accountId" type="Id"/>
     <aura:attribute name="account" type="Account"/>

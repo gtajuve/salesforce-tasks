@@ -4,8 +4,9 @@
  - @date 6/25/19
  -->
 
-<aura:component description="AccItem"  controller="AccountsController" implements="forceCommunity:availableForAllPageTypes">
+<aura:component description="AccItem"  controller="AccountsController" implements="lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes">
 
+    <lightning:navigation aura:id="navigationService" />
     <aura:attribute name="account" type="Account"/>
     <aura:handler event="force:showToast" action="{!c.refreshView}"/>
     <tr>
