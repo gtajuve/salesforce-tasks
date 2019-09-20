@@ -22,12 +22,12 @@ private class PersonAccountServiceTest {
 		}, new List<String>{
 				'FirstName', 'LastName', 'MailingAddress', 'OtherAddress'
 		},null);
-		FieldsPermission fieldPermission = (FieldsPermission) Test.createStub(FieldsPermission.class, mockFieldsPermission);
+		FieldsPermissionService fieldPermission = (FieldsPermissionService) Test.createStub(FieldsPermissionService.class, mockFieldsPermission);
 		Contact contact = new Contact(FirstName = 'Test', LastName = 'Test', MailingCountry = 'Bulgaria' , OtherCountry = 'USA' );
 		List<Contact> contacts = new List<Contact>();
 		contacts.add(contact);
 		PersonAccountService pas = new PersonAccountService();
-		pas.fieldPermission = fieldPermission;
+//		pas.fieldPermission = fieldPermission;
 		Test.startTest();
 		pas.createPersonAccount(contacts);
 		Test.stopTest();
@@ -43,12 +43,12 @@ private class PersonAccountServiceTest {
 		}, new List<String>{
 				'LastName', 'MailingAddress', 'OtherAddress'
 		},null);
-		FieldsPermission fieldPermission = (FieldsPermission) Test.createStub(FieldsPermission.class, mockFieldsPermission);
+		FieldsPermissionService fieldPermission = (FieldsPermissionService) Test.createStub(FieldsPermissionService.class, mockFieldsPermission);
 		Contact contact = new Contact(FirstName = 'Test', LastName = 'Test');
 		List<Contact> contacts = new List<Contact>();
 		contacts.add(contact);
 		PersonAccountService pas = new PersonAccountService();
-		pas.fieldPermission = fieldPermission;
+//		pas.fieldPermission = fieldPermission;
 		Test.startTest();
 		pas.createPersonAccount(contacts);
 		Test.stopTest();
@@ -64,10 +64,10 @@ private class PersonAccountServiceTest {
 		}, new List<String>{
 				'FirstName', 'MailingAddress', 'OtherAddress'
 		},null);
-		FieldsPermission fieldPermission = (FieldsPermission) Test.createStub(FieldsPermission.class, mockFieldsPermission);
+		FieldsPermissionService fieldPermission = (FieldsPermissionService) Test.createStub(FieldsPermissionService.class, mockFieldsPermission);
 		Contact contact = new Contact(FirstName = 'Test', LastName = 'Test');
 		PersonAccountService pas = new PersonAccountService();
-		pas.fieldPermission = fieldPermission;
+//		pas.fieldPermission = fieldPermission;
 		List<Contact> contacts = new List<Contact>();
 		contacts.add(contact);
 		Test.startTest();

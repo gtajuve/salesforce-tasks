@@ -30,7 +30,6 @@ public with sharing class PersonAccountsController {
 		List<fieldDataWrapper> wrapperList = new List<fieldDataWrapper>();
 
 		Map<String, Schema.SObjectField> mapFieldList = Schema.getGlobalDescribe().get(selectedObject).getDescribe().fields.getMap();
-		System.debug(mapFieldList);
 		for (Schema.SObjectField field : mapFieldList.values()) {
 			Schema.DescribeFieldResult fieldResult = field.getDescribe();
 
